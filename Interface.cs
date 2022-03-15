@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using QRCoder;
+using MySql;
+
 
 namespace Demarrage_PPE
 {
