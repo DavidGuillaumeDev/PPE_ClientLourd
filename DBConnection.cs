@@ -7,8 +7,6 @@ namespace Demarrage_PPE
 {
     public  class DBConnection
     {
-
-
         public DBConnection()
         {
         }
@@ -38,7 +36,6 @@ namespace Demarrage_PPE
                 Connection = new MySqlConnection(connstring);
                 Connection.Open();
             }
-
             return true;
         }
 

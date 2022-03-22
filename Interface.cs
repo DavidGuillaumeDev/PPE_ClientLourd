@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using QRCoder;
-using MySql;
+using MySql.Data.MySqlClient;
+
+
 
 
 namespace Demarrage_PPE
@@ -13,22 +14,22 @@ namespace Demarrage_PPE
         public static int MenuPrincipal()
         {
             Console.Clear();
-            Console.WriteLine("Bienvenue au salon");
-            Console.WriteLine("1. Ajouter un participant");
-            Console.WriteLine("2. Rechercher un participant");
-            Console.WriteLine("3. Créer le badge d'un participant");
-            Console.WriteLine("4. Quitter");
+            Console.WriteLine("...................Bienvenue au salon............");
+            Console.WriteLine("1 : Ajouter un participant ");
+            Console.WriteLine("2 : Rechercher un participant");
+            Console.WriteLine("3 : Creér le badge d'un participant");
+            Console.WriteLine("4 : Quitter");
             Console.WriteLine("");
+            Console.Write("Votre choix : - ");
             try
             {
-                int Choix = int.Parse(Console.ReadLine());
-                return Choix;
+                String LeChoix = Console.ReadLine();
+                return int.Parse(LeChoix);
             }
             catch
             {
-                return 0;
+                return 0; //Erreur de Saisie
             }
-            
         }
         public static int Afficher()
         {
@@ -42,27 +43,35 @@ namespace Demarrage_PPE
             return choixUser;
         }
 
-        public static void TraiterChoix(int choixUser)
+        public static void TraiterChoix(int LeChoix, DBConnection DataBaseConnection, MySqlDataReader TheReader)
         {
-            switch (choixUser)
+            switch (LeChoix)
             {
                 case 0:
-                    Console.WriteLine("Les choix possibles sont 1, 2 ou 3. Appuyez sur une touche pour continuer");
+                    Console.WriteLine("Les choix possibles sont 1, 2, 3 ou 4. Appuyez sur une touche pour continuer");
                     Console.ReadKey();
                     break;
+
                 case 1:
                     Console.WriteLine("Vous souhaitez ajouter un participant. Appuyez sur une touche pour continuer");
                     Console.ReadKey();
-                    AjouterClient(DataBaseConnection, TheReader);
+                    AjouterParticipant(DataBaseConnection, TheReader);
                     break;
+
                 case 2:
                     Console.WriteLine("Vous souhaitez rechercher un participant. Appuyez sur une touche pour continuer");
                     Console.ReadKey();
+                    RechercherParticipant(DataBaseConnection, TheReader);
                     break;
+
                 case 3:
-                    Console.WriteLine("Au revoir...");
+                    Console.WriteLine("Vous souhaitez générer le badge d'un participant");
+                    Console.ReadKey();
+                    FabriquerBadge(1);
                     break;
-                default:
+
+                case 4:
+                    Console.WriteLine("Au revoir.....");
                     break;
             }
         }
@@ -79,6 +88,46 @@ namespace Demarrage_PPE
             monStreamWriter.Close();
             Console.WriteLine("Le QrCode est généré. Appuyer sur une touche pour continuer");
             Console.ReadKey();
+        }
+
+        public static void RechercherParticipant(DBConnection DataBaseConnection, MySqlDataReader TheReader)
+        {
+            String NomParticipant;
+            Console.Clear();
+            Console.WriteLine(".....................................................");
+            Console.Write("...................Nom du participant recherché ?");
+            NomParticipant = Console.ReadLine();
+
+            string query = "select id,nom,prenom,email from Participant where nom =?nom;";
+            query = Tools.PrepareLigne(query, "?nom", Tools.PrepareChamp(NomParticipant, "Chaine"));
+
+            var cmd = new MySqlCommand(query, DataBaseConnection.Connection);
+            List<Participant> LesParticipantsTrouves = new List<Participant>();
+            TheReader = cmd.ExecuteReader();//On est arrivé à la fin, il faut recharger le reader
+            while (TheReader.Read())
+            {
+                Participant UnParticipant = new Participant
+                {
+                    ParticipantID = (int)TheReader["id"],
+                    Nom = (string)TheReader["nom"],
+                    Prenom = (string)TheReader["prenom"],
+                    Email = (string)TheReader["email"]
+
+                };
+                LesParticipantsTrouves.Add(UnParticipant);
+            }
+            if (LesParticipantsTrouves.Count > 0)
+            {
+                Console.WriteLine("--------------------Participants Trouvés------------------");
+                foreach (Participant UnParticipant in LesParticipantsTrouves)
+                    Console.WriteLine(UnParticipant.ParticipantID.ToString() + ", " + UnParticipant.Prenom + ", " + UnParticipant.Nom + ", " + UnParticipant.Email);
+            }
+            else
+                Console.WriteLine("Je n'ai trouvé personne.");
+            Console.WriteLine("Appuyer sur une touche pour continuer");
+            Console.ReadKey();
+            TheReader.Close();
+
         }
 
         public static void AjouterParticipant(DBConnection DataBaseConnection, MySqlDataReader TheReader)
@@ -110,9 +159,9 @@ namespace Demarrage_PPE
                 }
                 catch
                 {
-                    
+
                 }
-            }
+            } while (Reponse == "");
         }
     }
 }
