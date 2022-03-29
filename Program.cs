@@ -18,7 +18,7 @@ namespace Demarrage_PPE
             }
 
             DBConnection dbCon = new DBConnection();
-            dbCon.Server = "127.0.0.1";
+            dbCon.Server = "127.0.0.1:3306";
             dbCon.DatabaseName = "sucrerie";
             dbCon.UserName = "root";
             dbCon.Password = "";

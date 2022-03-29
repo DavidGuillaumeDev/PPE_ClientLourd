@@ -67,7 +67,7 @@ namespace Demarrage_PPE
                 case 3:
                     Console.WriteLine("Vous souhaitez générer le badge d'un participant");
                     Console.ReadKey();
-                    FabriquerBadge(1);
+                    FabriquerBadge(1, "Dav", "Gui");
                     break;
 
                 case 4:
@@ -76,15 +76,27 @@ namespace Demarrage_PPE
             }
         }
 
-        public static void FabriquerBadge(int TheparticipantID)
+        public static void FabriquerBadge(int TheparticipantID, String UnNom, String UnPrenom)
         {
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(TheparticipantID.ToString(),QRCodeGenerator.ECCLevel.Q );
+
             Base64QRCode qrCode = new Base64QRCode(qrCodeData);
             string qrCodeImageAsBase64 = qrCode.GetGraphic(20);
-            Console.WriteLine("Le QrCode en base 64 est : " + qrCodeImageAsBase64);
-            StreamWriter monStreamWriter = new StreamWriter(@"QRCode.txt");
-            monStreamWriter.Write(qrCodeImageAsBase64);
+
+            StreamWriter monStreamWriter = new StreamWriter(@"BadgeSalon.html");
+
+            String strImage = "<img src=\"data:image/png;base64," + qrCodeImageAsBase64 + "\">";
+            monStreamWriter.WriteLine("<html>");
+            monStreamWriter.WriteLine("<body>");
+            string temptext = "<P>" + UnNom + "<P>";
+            monStreamWriter.WriteLine(temptext);
+            temptext = "<P>" + UnPrenom + "<P>";
+            monStreamWriter.WriteLine(temptext);
+            monStreamWriter.WriteLine(strImage);
+            monStreamWriter.WriteLine("<body>");
+            monStreamWriter.WriteLine("<html>");
+            
             monStreamWriter.Close();
             Console.WriteLine("Le QrCode est généré. Appuyer sur une touche pour continuer");
             Console.ReadKey();
@@ -129,7 +141,7 @@ namespace Demarrage_PPE
             TheReader.Close();
 
         }
-
+        
         public static void AjouterParticipant(DBConnection DataBaseConnection, MySqlDataReader TheReader)
         {
             Participant UnParticipant = new Participant();
@@ -145,23 +157,22 @@ namespace Demarrage_PPE
             Console.Write("..............Voulez-vous enregistrer ce participant ?");
             String Reponse = "";
             do
-            {
                 try
                 {
                     Reponse = Console.ReadLine();
-                    Reponse = Reponse.ToUpper();
+                    Reponse = Reponse.ToUpper();//On convertit en majuscule
                     if (Reponse == "O")
-                    {
-                        //Enregistrement dans la BDD
-                        UnParticipant.Init(NomParticipant, PrenomParticipant, EmailParticipant);
+                        //Ici on effectue l'enregistrement dans la BDD
+                        //UnParticipant.Init(NomParticipant, PrenomParticipant, EmailParticipant);
                         UnParticipant.Save(DataBaseConnection, TheReader);
-                    }
+                        Console.WriteLine("Le participant est enregistré");
+                        System.Threading.Thread.Sleep(2000);//On patiente deux secondes
                 }
                 catch
                 {
-
+                    Console.WriteLine("Choix incorrect");
                 }
-            } while (Reponse == "");
+            while ((Reponse != "o") && (Reponse != "O") && (Reponse != "n") && (Reponse != "N"));
         }
     }
 }
