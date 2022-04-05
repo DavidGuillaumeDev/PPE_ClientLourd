@@ -103,5 +103,10 @@ namespace Demarrage_PPE
                 Console.Write("Erreur N° " + ex.Number + " : " + ex.Message);
             }
         }
+
+        public String GetParticipant()
+        {
+            return "\n" + Nom.ToUpper() + "\n" + Prenom + "\n" + Email;
+        }
     }
 }

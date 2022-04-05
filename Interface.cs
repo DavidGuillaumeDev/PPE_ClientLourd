@@ -17,8 +17,7 @@ namespace Demarrage_PPE
             Console.WriteLine("...................Bienvenue au salon............");
             Console.WriteLine("1 : Ajouter un participant ");
             Console.WriteLine("2 : Rechercher un participant");
-            Console.WriteLine("3 : Creér le badge d'un participant");
-            Console.WriteLine("4 : Quitter");
+            Console.WriteLine("3 : Quitter");
             Console.WriteLine("");
             Console.Write("Votre choix : - ");
             try
@@ -44,7 +43,7 @@ namespace Demarrage_PPE
                 case 1:
                     Console.WriteLine("Vous souhaitez ajouter un participant. Appuyez sur une touche pour continuer");
                     Console.ReadKey();
-                    AjouterParticipant(DataBaseConnection, TheReader);
+                    AjouterParticipant(DataBaseConnection);
                     break;
 
                 case 2:
@@ -54,21 +53,16 @@ namespace Demarrage_PPE
                     break;
 
                 case 3:
-                    Console.WriteLine("Vous souhaitez générer le badge d'un participant");
-                    Console.ReadKey();
-                    FabriquerBadge(1, "Dav", "Gui");
-                    break;
-
-                case 4:
                     Console.WriteLine("Au revoir.....");
                     break;
             }
         }
 
-        public static void FabriquerBadge(int TheparticipantID, String UnNom, String UnPrenom)
+        public static void FabriquerBadge(Participant UnParticipant)
         {
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(TheparticipantID.ToString(),QRCodeGenerator.ECCLevel.Q );
+            string qrBrut = "L'email du participant est : " + UnParticipant.Email;
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrBrut.ToString(),QRCodeGenerator.ECCLevel.Q );
 
             Base64QRCode qrCode = new Base64QRCode(qrCodeData);
             string qrCodeImageAsBase64 = qrCode.GetGraphic(20);
@@ -78,9 +72,9 @@ namespace Demarrage_PPE
             String strImage = "<img src=\"data:image/png;base64," + qrCodeImageAsBase64 + "\">";
             monStreamWriter.WriteLine("<html>");
             monStreamWriter.WriteLine("<body>");
-            string temptext = "<P>" + UnNom + "<P>";
+            string temptext = "<P>" + UnParticipant.Nom + "<P>";
             monStreamWriter.WriteLine(temptext);
-            temptext = "<P>" + UnPrenom + "<P>";
+            temptext = "<P>" + UnParticipant.Prenom + "<P>";
             monStreamWriter.WriteLine(temptext);
             monStreamWriter.WriteLine(strImage);
             monStreamWriter.WriteLine("<body>");
@@ -99,12 +93,12 @@ namespace Demarrage_PPE
             Console.Write("...................Nom du participant recherché ?");
             NomParticipant = Console.ReadLine();
 
-            string query = "select id,nom,prenom,email from Participant where nom =?nom;";
+            string query = "select id,nom,prenom,email from participant where nom =?nom;";
             query = Tools.PrepareLigne(query, "?nom", Tools.PrepareChamp(NomParticipant, "Chaine"));
 
             var cmd = new MySqlCommand(query, DataBaseConnection.Connection);
             List<Participant> LesParticipantsTrouves = new List<Participant>();
-            TheReader = cmd.ExecuteReader();//On est arrivé à la fin, il faut recharger le reader
+            TheReader = cmd.ExecuteReader(); //On est arrivé à la fin, il faut recharger le reader
             while (TheReader.Read())
             {
                 Participant UnParticipant = new Participant
@@ -121,7 +115,17 @@ namespace Demarrage_PPE
             {
                 Console.WriteLine("--------------------Participants Trouvés------------------");
                 foreach (Participant UnParticipant in LesParticipantsTrouves)
+                {
                     Console.WriteLine(UnParticipant.ParticipantID.ToString() + ", " + UnParticipant.Prenom + ", " + UnParticipant.Nom + ", " + UnParticipant.Email);
+                }
+                Console.WriteLine("--------------------Saisissez l'ID------------------");
+                int IdAImprimer = int.Parse(Console.ReadLine());
+                int index = LesParticipantsTrouves.FindIndex(requete => requete.ParticipantID == IdAImprimer);
+                if(index > -1)
+                {
+                    Participant LeParticipantAImprimer = LesParticipantsTrouves[index];
+                    FabriquerBadge(LeParticipantAImprimer);
+                }
             }
             else
                 Console.WriteLine("Je n'ai trouvé personne.");
@@ -130,38 +134,38 @@ namespace Demarrage_PPE
             TheReader.Close();
 
         }
-        
-        public static void AjouterParticipant(DBConnection DataBaseConnection, MySqlDataReader TheReader)
+
+        public static void AjouterParticipant(DBConnection DataBaseConnection)
         {
             Participant UnParticipant = new Participant();
             String NomParticipant, PrenomParticipant, EmailParticipant;
             Console.Clear();
-            Console.WriteLine(".............................................");
-            Console.Write("..............Nom du Participant?");
+            Console.WriteLine("Nom du participant : ");
             NomParticipant = Console.ReadLine();
-            Console.Write("..............Prenom du Participant?");
+            Console.WriteLine("Prénom du participant : ");
             PrenomParticipant = Console.ReadLine();
-            Console.Write("..............Email du Participant?");
+            Console.WriteLine("Email du participant : ");
             EmailParticipant = Console.ReadLine();
-            Console.Write("..............Voulez-vous enregistrer ce participant ?");
-            String Reponse = "";
-            do
+            UnParticipant.Nom = NomParticipant;
+            UnParticipant.Prenom = PrenomParticipant;
+            UnParticipant.Email = EmailParticipant;
+            if (DataBaseConnection.IsConnect())
+            {
                 try
                 {
-                    Reponse = Console.ReadLine();
-                    Reponse = Reponse.ToUpper();//On convertit en majuscule
-                    if (Reponse == "O")
-                        //Ici on effectue l'enregistrement dans la BDD
-                        //UnParticipant.Init(NomParticipant, PrenomParticipant, EmailParticipant);
-                        UnParticipant.Save(DataBaseConnection, TheReader);
-                        Console.WriteLine("Le participant est enregistré");
-                        System.Threading.Thread.Sleep(2000);//On patiente deux secondes
+                    String sqlString = "INSERT INTO participant(nom,prenom,email) VALUES(?nom,?prenom,?email)";
+                    sqlString = Tools.PrepareLigne(sqlString, "?nom", Tools.PrepareChamp(UnParticipant.Nom, "Chaine"));
+                    sqlString = Tools.PrepareLigne(sqlString, "?prenom", Tools.PrepareChamp(UnParticipant.Prenom, "Chaine"));
+                    sqlString = Tools.PrepareLigne(sqlString, "?email", Tools.PrepareChamp(UnParticipant.Email, "Chaine"));
+                    var cmd = new MySqlCommand(sqlString, DataBaseConnection.Connection);
+                    cmd.ExecuteNonQuery();
                 }
-                catch
+                catch (MySql.Data.MySqlClient.MySqlException ex)
                 {
-                    Console.WriteLine("Choix incorrect");
+                    Console.Write("Erreur N° " + ex.Number + " : " + ex.Message);
                 }
-            while ((Reponse != "o") && (Reponse != "O") && (Reponse != "n") && (Reponse != "N"));
+                Console.WriteLine(UnParticipant.GetParticipant() + "\n");
+            }
         }
     }
 }
