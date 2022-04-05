@@ -31,17 +31,6 @@ namespace Demarrage_PPE
                 return 0; //Erreur de Saisie
             }
         }
-        public static int Afficher()
-        {
-            int choixUser;
-            Console.Clear();
-            Console.WriteLine("1. Rechercher un Participant");
-            Console.WriteLine("2. Ajouter un Participant");
-            Console.WriteLine("3. Quitter");
-            Console.WriteLine("Votre Choix : ");
-            choixUser = int.Parse(Console.ReadLine());
-            return choixUser;
-        }
 
         public static void TraiterChoix(int LeChoix, DBConnection DataBaseConnection, MySqlDataReader TheReader)
         {

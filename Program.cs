@@ -18,7 +18,7 @@ namespace Demarrage_PPE
             }
 
             DBConnection dbCon = new DBConnection();
-            dbCon.Server = "127.0.0.1:3306";
+            dbCon.Server = "127.0.0.1";
             dbCon.DatabaseName = "sucrerie";
             dbCon.UserName = "root";
             dbCon.Password = "";
@@ -40,7 +40,7 @@ namespace Demarrage_PPE
 
                 do
                 {
-                    choixUser = Interface.Afficher();
+                    choixUser = Interface.MenuPrincipal();
                     Interface.TraiterChoix(choixUser, dbCon, TheReader);
                 } while (choixUser != 3);
             }
