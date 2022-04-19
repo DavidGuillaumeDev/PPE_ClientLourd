@@ -287,6 +287,23 @@
             "rid": "win"
           }
         }
+      },
+      "PPE_BelleTable/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "MySql.Data": "8.0.28",
+          "QRCoder": "1.4.3"
+        },
+        "compile": {
+          "bin/placeholder/PPE_BelleTable.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PPE_BelleTable.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
       }
     }
   },
@@ -875,11 +892,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "PPE_BelleTable/1.0.0": {
+      "type": "project",
+      "path": "../PPE_BelleTable/PPE_BelleTable.csproj",
+      "msbuildProject": "../PPE_BelleTable/PPE_BelleTable.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "MySql.Data >= 8.0.28",
+      "PPE_BelleTable >= 1.0.0",
       "QRCoder >= 1.4.3"
     ]
   },
@@ -909,7 +932,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\guill\\source\\repos\\PPE_BelleTable\\PPE_BelleTable.csproj": {
+              "projectPath": "C:\\Users\\guill\\source\\repos\\PPE_BelleTable\\PPE_BelleTable.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
