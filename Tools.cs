@@ -1,23 +1,14 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
-using System.Text;
-
-namespace Demarrage_PPE
+using MySql.Data.MySqlClient;
+namespace PPE_Salons
 {
-    class Tools
+    public static class Tools
     {
-        public static List<Client> CollectionVille(List<Client> contacts, string Laville)
-        {
-            List<Client> LesClientsdelaVille = new List<Client>();
-            foreach (Client UnContact in contacts)
-            {
-                if (UnContact.ContactVille == Laville)
-                    LesClientsdelaVille.Add(UnContact);
-            }
-            return LesClientsdelaVille;
-        }
+       
 
-        public static String PrepareChamp(String LaValeur, String LeType)
+        public static String PrepareChamp( String LaValeur,String LeType)
         {
             string ValeurPreparee = "";
             switch (LeType)
@@ -27,17 +18,19 @@ namespace Demarrage_PPE
                     break;
 
                 case "Nombre":
-                    ValeurPreparee = LaValeur;
+                    ValeurPreparee =  LaValeur;
                     break;
             }
             return ValeurPreparee;
-        }
+}
 
-        public static String PrepareLigne(String LaLigne, String LaColonne, String LaValeur)
+        public static String PrepareLigne(String LaLigne,String LeMotCle,String LaValeur)
         {
             string LignePreparee = "";
-            LignePreparee = LaLigne.Replace(LaColonne, LaValeur);
+            LignePreparee = LaLigne.Replace(LeMotCle, LaValeur);
             return LignePreparee;
         }
+
+   
     }
 }

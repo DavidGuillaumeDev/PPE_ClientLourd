@@ -1,12 +1,12 @@
 ﻿using System;
 using MySql.Data;
 using MySql.Data.MySqlClient;
-
-
-namespace Demarrage_PPE
+namespace PPE_Salons
 {
     public  class DBConnection
     {
+
+
         public DBConnection()
         {
         }
@@ -36,6 +36,7 @@ namespace Demarrage_PPE
                 Connection = new MySqlConnection(connstring);
                 Connection.Open();
             }
+
             return true;
         }
 

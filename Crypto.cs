@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Demarrage_PPE
+namespace PPE_Salons
 {
     public static class Crypto
     {

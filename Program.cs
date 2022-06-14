@@ -1,48 +1,35 @@
 ﻿using System;
-using MySql;
-using MySql.Data;
-using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-
-namespace Demarrage_PPE
+namespace PPE_Salons
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Point d'entrée principal de l'application.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            int choixUser = 0;
-            if (args.Length > 0)
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            FormLogin MonFormLogin = new FormLogin();
+
+            MonFormLogin.ShowDialog();
+            if (MonFormLogin.DialogResult == DialogResult.OK)
             {
-                Console.WriteLine(args[0]);
-                return;
+                //String NiveauUtilisateur = MonFormLogin.StrLevel;
+                //String LeNomUtilisateur = MonFormLogin.NomUtilisateur;
+                MonFormLogin.Close();
+                Application.Run(new Form1());
             }
-
-            DBConnection dbCon = new DBConnection();
-            dbCon.Server = "127.0.0.1";
-            dbCon.DatabaseName = "sucrerie";
-            dbCon.UserName = "root";
-            dbCon.Password = "";
-
-            if (dbCon.IsConnect())
+            else
             {
-                //Parcours Classique d'un curseur, adressage des colonnes par leur position ordinale dans la requête
-                string query = "select code_c, nom, adresse, ville from client;";
-                var cmd = new MySqlCommand(query, dbCon.Connection);
-                var TheReader = cmd.ExecuteReader();//Remplissage du curseur
-                Console.WriteLine("--------------------Parcours Classique du reader------------------");
-                while (TheReader.Read()) //On affiche le contenu de chaque ligne
-                {
-                    string someStringFromColumnZero = TheReader.GetString(0);
-                    string someStringFromColumnOne = TheReader.GetString(1);
-                    Console.WriteLine(someStringFromColumnZero + "," + someStringFromColumnOne);
-                }
-                TheReader.Close();
-
-                do
-                {
-                    choixUser = Interface.MenuPrincipal();
-                    Interface.TraiterChoix(choixUser, dbCon, TheReader);
-                } while (choixUser != 3);
+                MonFormLogin.Close();
+                MessageBox.Show("Au revoir");
             }
         }
     }
