@@ -23,8 +23,9 @@ namespace PPE_Salons
             {
                 int NiveauUtilisateur = MonFormLogin.Level;
                 int LeNomUtilisateur = MonFormLogin.Identifiant;
+                int TypeCo = MonFormLogin.TypeCo;
                 MonFormLogin.Close();
-                Application.Run(new Form1(NiveauUtilisateur, LeNomUtilisateur));
+                Application.Run(new FormMainMenu(NiveauUtilisateur, LeNomUtilisateur, TypeCo));
             }
             else
             {

@@ -15,8 +15,11 @@ namespace PPE_Salons
     public partial class PageParticipant : Form
     {
         Contact LeParticipant;
-        public PageParticipant(Contact unParticipant)
+
+        public int TypeCo;
+        public PageParticipant(Contact unParticipant, int LeTypeCo)
         {
+            TypeCo = LeTypeCo;
             InitializeComponent();
             LeParticipant = unParticipant;
             tbNom.Text = unParticipant.Nom;
@@ -58,7 +61,7 @@ namespace PPE_Salons
                 IsOK = false;
             }
             if(IsOK)
-            LeParticipant.Save();
+            LeParticipant.Save(TypeCo);
             Error3.Text = "Enregistrement effectué";
         }
 
@@ -71,7 +74,7 @@ namespace PPE_Salons
             Base64QRCode qrCode = new Base64QRCode(qrCodeData);
             string qrCodeImageAsBase64 = qrCode.GetGraphic(20);
 
-            StreamWriter monStreamWriter = new StreamWriter(@"C:\Temp\BadgeSalon.html");//Necessite using System.IO;
+            StreamWriter monStreamWriter = new StreamWriter(@"C:\Users\guill\source\repos\PPE_ClientLourd\BadgeSalon.html");//Necessite using System.IO;
            
             String strImage = " <img src = \"data:image/png;base64," + qrCodeImageAsBase64 + "\">";
             monStreamWriter.WriteLine("<html>");
@@ -85,7 +88,7 @@ namespace PPE_Salons
 
             // Fermeture du StreamWriter (Très important) 
             monStreamWriter.Close();
-            System.Diagnostics.Process.Start("Chrome", @"C:\Temp\BadgeSalon.html");
+            System.Diagnostics.Process.Start("Chrome", @"C:\Users\guill\source\repos\PPE_ClientLourd\BadgeSalon.html");
             MessageBox.Show("Badge généré");
         }
     }

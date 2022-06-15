@@ -1,6 +1,6 @@
 ﻿namespace PPE_Salons
 {
-    partial class Form1
+    partial class FormMainMenu
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -43,19 +43,21 @@
             // MaGrid
             // 
             this.MaGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MaGrid.Location = new System.Drawing.Point(23, 79);
+            this.MaGrid.Location = new System.Drawing.Point(31, 97);
+            this.MaGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaGrid.MultiSelect = false;
             this.MaGrid.Name = "MaGrid";
             this.MaGrid.RowHeadersWidth = 51;
             this.MaGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MaGrid.Size = new System.Drawing.Size(422, 395);
+            this.MaGrid.Size = new System.Drawing.Size(563, 486);
             this.MaGrid.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(322, 45);
+            this.button1.Location = new System.Drawing.Point(429, 55);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 22);
+            this.button1.Size = new System.Drawing.Size(164, 27);
             this.button1.TabIndex = 1;
             this.button1.Text = "Tous les Participants";
             this.button1.UseVisualStyleBackColor = true;
@@ -63,9 +65,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(451, 79);
+            this.button2.Location = new System.Drawing.Point(601, 97);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 2;
             this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
@@ -73,9 +76,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(451, 125);
+            this.button3.Location = new System.Drawing.Point(601, 154);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(100, 28);
             this.button3.TabIndex = 3;
             this.button3.Text = "Ouvrir";
             this.button3.UseVisualStyleBackColor = true;
@@ -83,9 +87,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(451, 180);
+            this.button4.Location = new System.Drawing.Point(601, 222);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(100, 28);
             this.button4.TabIndex = 4;
             this.button4.Text = "Supprimer";
             this.button4.UseVisualStyleBackColor = true;
@@ -93,25 +98,28 @@
             // 
             // tbNom
             // 
-            this.tbNom.Location = new System.Drawing.Point(55, 47);
+            this.tbNom.Location = new System.Drawing.Point(73, 58);
+            this.tbNom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbNom.Name = "tbNom";
-            this.tbNom.Size = new System.Drawing.Size(180, 20);
+            this.tbNom.Size = new System.Drawing.Size(239, 22);
             this.tbNom.TabIndex = 5;
             // 
             // Nom
             // 
             this.Nom.AutoSize = true;
-            this.Nom.Location = new System.Drawing.Point(20, 50);
+            this.Nom.Location = new System.Drawing.Point(27, 62);
+            this.Nom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Nom.Name = "Nom";
-            this.Nom.Size = new System.Drawing.Size(29, 13);
+            this.Nom.Size = new System.Drawing.Size(37, 17);
             this.Nom.TabIndex = 6;
             this.Nom.Text = "Nom";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(241, 45);
+            this.button5.Location = new System.Drawing.Point(321, 55);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(100, 28);
             this.button5.TabIndex = 7;
             this.button5.Text = "Rechercher";
             this.button5.UseVisualStyleBackColor = true;
@@ -119,21 +127,21 @@
             // 
             // buttonAdmin
             // 
-            this.buttonAdmin.Location = new System.Drawing.Point(451, 362);
-            this.buttonAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAdmin.Location = new System.Drawing.Point(601, 446);
+            this.buttonAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdmin.Name = "buttonAdmin";
-            this.buttonAdmin.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdmin.Size = new System.Drawing.Size(100, 28);
             this.buttonAdmin.TabIndex = 8;
             this.buttonAdmin.Text = "Admin";
             this.buttonAdmin.UseVisualStyleBackColor = true;
             this.buttonAdmin.Visible = false;
             this.buttonAdmin.Click += new System.EventHandler(this.buttonAdmin_Click);
             // 
-            // Form1
+            // FormMainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 484);
+            this.ClientSize = new System.Drawing.Size(707, 596);
             this.Controls.Add(this.buttonAdmin);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.Nom);
@@ -143,7 +151,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.MaGrid);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "FormMainMenu";
             this.Text = "Gestion des salons";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MaGrid)).EndInit();

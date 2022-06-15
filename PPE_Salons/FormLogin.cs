@@ -15,9 +15,21 @@ namespace PPE_Salons
     {
         public int Identifiant = -1;
         public int Level = 0;
+        public int TypeCo;
         public FormLogin()
         {
             InitializeComponent();
+            DefineCo_Load();
+        }
+
+        private void DefineCo_Load()
+        {
+            var ComboLevelSource = new List<ComboValue>();
+            ComboLevelSource.Add(new ComboValue() { Name = "Locale", Value = "0" });
+            ComboLevelSource.Add(new ComboValue() { Name = "Distante", Value = "1" });
+            comboBoxTypeCo.DataSource = ComboLevelSource;
+            comboBoxTypeCo.DisplayMember = "Name";
+            comboBoxTypeCo.ValueMember = "Value";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -27,14 +39,11 @@ namespace PPE_Salons
 
         private void button2_Click(object sender, EventArgs e)
         {
+            ComboValue MaComboValue = (ComboValue)comboBoxTypeCo.SelectedItem;
+            TypeCo = int.Parse(MaComboValue.Value);
+            DBConnection dbCon = DBConnection.Connect(TypeCo);
             try
             {
-                DBConnection dbCon = new DBConnection();
-                dbCon.Server = "127.0.0.1";
-                dbCon.DatabaseName = "ppe_client_lourd";
-                dbCon.UserName = "root";
-                dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
-                
                 if (dbCon.IsConnect())
                 {
                     String sqlString = "ChercherUtilisateur";

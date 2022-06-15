@@ -13,8 +13,10 @@ namespace PPE_Salons
 {
     public partial class AddUser : Form
     {
-        public AddUser()
+        public int TypeCo;
+        public AddUser(int LeTypeCo)
         {
+            TypeCo = LeTypeCo;
             InitializeComponent();
         }
 
@@ -25,11 +27,7 @@ namespace PPE_Salons
 
             try
             {
-                DBConnection dbCon = new DBConnection();
-                dbCon.Server = "127.0.0.1";
-                dbCon.DatabaseName = "ppe_client_lourd";
-                dbCon.UserName = "root";
-                dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+                DBConnection dbCon = DBConnection.Connect(TypeCo); 
                 if (dbCon.IsConnect())
                 {
                     String sqlString = "AjouterUtilisateur";
@@ -52,8 +50,6 @@ namespace PPE_Salons
 
                     dbCon.Close();
                     MessageBox.Show("Utilisateur ajouté");
-
-
                 }
                 dbCon.Close();
 
@@ -72,6 +68,11 @@ namespace PPE_Salons
             comboLevel.DataSource = ComboLevelSource;
             comboLevel.DisplayMember = "Name";
             comboLevel.ValueMember = "Value";
+        }
+
+        private void comboLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

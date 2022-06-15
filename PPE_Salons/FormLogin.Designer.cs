@@ -48,50 +48,50 @@ namespace PPE_Salons
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textBoxLogin);
-            this.groupBox1.Location = new System.Drawing.Point(40, 27);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(53, 33);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(176, 54);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(235, 66);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login";
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(12, 25);
-            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxLogin.Location = new System.Drawing.Point(16, 31);
+            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(149, 20);
+            this.textBoxLogin.Size = new System.Drawing.Size(197, 22);
             this.textBoxLogin.TabIndex = 1;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.textBoxMdp);
-            this.groupBox2.Location = new System.Drawing.Point(40, 86);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Location = new System.Drawing.Point(53, 106);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(176, 54);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(235, 66);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Mot de Passe";
             // 
             // textBoxMdp
             // 
-            this.textBoxMdp.Location = new System.Drawing.Point(12, 24);
-            this.textBoxMdp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxMdp.Location = new System.Drawing.Point(16, 30);
+            this.textBoxMdp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxMdp.Name = "textBoxMdp";
             this.textBoxMdp.PasswordChar = '*';
-            this.textBoxMdp.Size = new System.Drawing.Size(149, 20);
+            this.textBoxMdp.Size = new System.Drawing.Size(197, 22);
             this.textBoxMdp.TabIndex = 2;
             // 
             // buttonAnnuler
             // 
-            this.buttonAnnuler.Location = new System.Drawing.Point(46, 210);
-            this.buttonAnnuler.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAnnuler.Location = new System.Drawing.Point(61, 258);
+            this.buttonAnnuler.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAnnuler.Name = "buttonAnnuler";
-            this.buttonAnnuler.Size = new System.Drawing.Size(77, 24);
+            this.buttonAnnuler.Size = new System.Drawing.Size(103, 30);
             this.buttonAnnuler.TabIndex = 2;
             this.buttonAnnuler.Text = "Annuler";
             this.buttonAnnuler.UseVisualStyleBackColor = true;
@@ -99,10 +99,10 @@ namespace PPE_Salons
             // 
             // buttonValider
             // 
-            this.buttonValider.Location = new System.Drawing.Point(131, 210);
-            this.buttonValider.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonValider.Location = new System.Drawing.Point(175, 258);
+            this.buttonValider.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonValider.Name = "buttonValider";
-            this.buttonValider.Size = new System.Drawing.Size(77, 24);
+            this.buttonValider.Size = new System.Drawing.Size(103, 30);
             this.buttonValider.TabIndex = 3;
             this.buttonValider.Text = "Valider";
             this.buttonValider.UseVisualStyleBackColor = true;
@@ -115,11 +115,11 @@ namespace PPE_Salons
             this.groupBox3.Controls.Add(this.buttonAnnuler);
             this.groupBox3.Controls.Add(this.groupBox2);
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(55, 20);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Location = new System.Drawing.Point(73, 25);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Size = new System.Drawing.Size(260, 252);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(347, 310);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Connexion";
@@ -127,11 +127,11 @@ namespace PPE_Salons
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.comboBoxTypeCo);
-            this.groupBox4.Location = new System.Drawing.Point(40, 145);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Location = new System.Drawing.Point(53, 178);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(176, 52);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Size = new System.Drawing.Size(235, 64);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Type de connexion";
@@ -139,33 +139,29 @@ namespace PPE_Salons
             // comboBoxTypeCo
             // 
             this.comboBoxTypeCo.FormattingEnabled = true;
-            this.comboBoxTypeCo.Items.AddRange(new object[] {
-            "Locale",
-            "Distante"});
-            this.comboBoxTypeCo.Location = new System.Drawing.Point(12, 20);
-            this.comboBoxTypeCo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxTypeCo.Location = new System.Drawing.Point(16, 25);
+            this.comboBoxTypeCo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxTypeCo.Name = "comboBoxTypeCo";
-            this.comboBoxTypeCo.Size = new System.Drawing.Size(149, 21);
+            this.comboBoxTypeCo.Size = new System.Drawing.Size(197, 24);
             this.comboBoxTypeCo.TabIndex = 4;
             // 
             // labelResponse
             // 
             this.labelResponse.AutoSize = true;
             this.labelResponse.ForeColor = System.Drawing.Color.Red;
-            this.labelResponse.Location = new System.Drawing.Point(105, 211);
-            this.labelResponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelResponse.Location = new System.Drawing.Point(140, 260);
             this.labelResponse.Name = "labelResponse";
-            this.labelResponse.Size = new System.Drawing.Size(0, 13);
+            this.labelResponse.Size = new System.Drawing.Size(0, 17);
             this.labelResponse.TabIndex = 5;
             // 
             // FormLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 294);
+            this.ClientSize = new System.Drawing.Size(493, 362);
             this.Controls.Add(this.labelResponse);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormLogin";
             this.Text = "FormLogin";
             this.Load += new System.EventHandler(this.FormLogin_Load);

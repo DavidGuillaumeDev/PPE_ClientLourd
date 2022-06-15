@@ -33,6 +33,7 @@ namespace PPE_Salons
             this.button2 = new System.Windows.Forms.Button();
             this.MaGrid = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MaGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +66,7 @@ namespace PPE_Salons
             // 
             this.MaGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MaGrid.Location = new System.Drawing.Point(21, 26);
-            this.MaGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaGrid.Margin = new System.Windows.Forms.Padding(4);
             this.MaGrid.MultiSelect = false;
             this.MaGrid.Name = "MaGrid";
             this.MaGrid.RowHeadersWidth = 51;
@@ -75,6 +76,7 @@ namespace PPE_Salons
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.MaGrid);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
@@ -86,6 +88,16 @@ namespace PPE_Salons
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Participants";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(217, 354);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(98, 43);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Détails";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // AdminMenu
             // 
@@ -108,5 +120,6 @@ namespace PPE_Salons
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView MaGrid;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button3;
     }
 }

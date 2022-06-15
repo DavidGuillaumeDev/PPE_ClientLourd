@@ -15,22 +15,19 @@ namespace PPE_Salons
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
-        public void Save()
+
+        public void Save(int TypeCo)
         {
             if (Id > 0)
-                UpdateParticipant();
-            else AddParticipant();
+                UpdateParticipant(TypeCo);
+            else AddParticipant(TypeCo);
         }
 
-        public bool Supprimer()
+        public bool Supprimer(int TypeCo)
         {
             try
             {
-                DBConnection dbCon = new DBConnection();
-                dbCon.Server = "127.0.0.1";
-                dbCon.DatabaseName = "ppe_client_lourd";
-                dbCon.UserName = "root";
-                dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+                DBConnection dbCon = DBConnection.Connect(TypeCo); 
                 if (dbCon.IsConnect())
                 {
                     String sqlString = "DELETE FROM contact  WHERE Id = ?id_P";
@@ -48,15 +45,11 @@ namespace PPE_Salons
 
         }
 
-        private void UpdateParticipant()
+        private void UpdateParticipant(int TypeCo)
         {
             try
             {
-                DBConnection dbCon = new DBConnection();
-                dbCon.Server = "127.0.0.1";
-                dbCon.DatabaseName = "ppe_client_lourd";
-                dbCon.UserName = "root";
-                dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+                DBConnection dbCon = DBConnection.Connect(TypeCo); 
                 if (dbCon.IsConnect())
                 {
                     String sqlString = "UPDATE contact SET Nom = ?nom_P,Prenom = ?prenom_P,Email = ?email_P WHERE Id = ?id_P";
@@ -76,16 +69,12 @@ namespace PPE_Salons
             }
         }
 
-            private void AddParticipant()
+            private void AddParticipant(int TypeCo)
             {
                 try
                 {
-                 Id = AppelerProcedureStockee();
-                DBConnection dbCon = new DBConnection();
-                dbCon.Server = "127.0.0.1";
-                dbCon.DatabaseName = "ppe_client_lourd";
-                dbCon.UserName = "root";
-                dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+                 Id = AppelerProcedureStockee(TypeCo);
+                DBConnection dbCon = DBConnection.Connect(TypeCo); 
                 if (dbCon.IsConnect())
                 {
                     String sqlString = "INSERT INTO contact(Id,Nom,Prenom, Email) VALUES(?id_P,?nom_P,?prenom_P,?Email_P)";
@@ -106,15 +95,11 @@ namespace PPE_Salons
 
             }
 
-        private int AppelerProcedureStockee()
+        private int AppelerProcedureStockee(int TypeCo)
             {
                 try
                 {
-                    DBConnection dbCon = new DBConnection();
-                    dbCon.Server = "127.0.0.1";
-                    dbCon.DatabaseName = "ppe_client_lourd";
-                    dbCon.UserName = "root";
-                    dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+                    DBConnection dbCon = DBConnection.Connect(TypeCo); 
                     int Identifiant = -1;
                     if (dbCon.IsConnect())
                     {

@@ -65,6 +65,7 @@ namespace PPE_Salons
             this.comboLevel.Name = "comboLevel";
             this.comboLevel.Size = new System.Drawing.Size(249, 24);
             this.comboLevel.TabIndex = 2;
+            this.comboLevel.SelectedIndexChanged += new System.EventHandler(this.comboLevel_SelectedIndexChanged);
             // 
             // groupBox1
             // 

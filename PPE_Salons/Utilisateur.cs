@@ -8,21 +8,41 @@ using MySql.Data.MySqlClient;
 
 namespace PPE_Salons
 {
-    class Utilisateur
+    public class Utilisateur
     {
         public int Id { get; set; }
         public string Nom { get; set; }
+        public string Pass { get; set; }
         public int Niveau { get; set; }
 
-        public bool Supprimer()
+
+        public void UpdateUtilisateur(int TypeCo)
         {
             try
             {
-                DBConnection dbCon = new DBConnection();
-                dbCon.Server = "127.0.0.1";
-                dbCon.DatabaseName = "ppe_client_lourd";
-                dbCon.UserName = "root";
-                dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+                DBConnection dbCon = DBConnection.Connect(TypeCo); 
+                if (dbCon.IsConnect())
+                {
+                    String sqlString = "UPDATE utilisateur SET nom = ?nom_P,niveau = ?niveau_P WHERE id = ?id_P";
+                    sqlString = Tools.PrepareLigne(sqlString, "?id_P", Tools.PrepareChamp(Id.ToString(), "Nombre"));
+                    sqlString = Tools.PrepareLigne(sqlString, "?nom_P", Tools.PrepareChamp(Nom, "Chaine"));
+                    sqlString = Tools.PrepareLigne(sqlString, "?niveau_P", Tools.PrepareChamp(Niveau.ToString(), "Chaine"));
+                    var cmd = new MySqlCommand(sqlString, dbCon.Connection);
+                    cmd.ExecuteNonQuery();
+                    dbCon.Close();
+                }
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+
+            }
+        }
+
+        public bool Supprimer(int TypeCo)
+        {
+            try
+            {
+                DBConnection dbCon = DBConnection.Connect(TypeCo); 
                 if (dbCon.IsConnect())
                 {
                     String sqlString = "DELETE FROM utilisateur  WHERE id = ?id_P";
@@ -37,7 +57,6 @@ namespace PPE_Salons
             {
                 return false;
             }
-
         }
     }
 }

@@ -13,25 +13,23 @@ namespace PPE_Salons
 {
     public partial class AdminMenu : Form
     {
-        public AdminMenu()
+        public int TypeCo;
+        public AdminMenu(int LeTypeCo)
         {
+            TypeCo = LeTypeCo;
             InitializeComponent();
             loadListeParticipants();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddUser adminPage = new AddUser();
+            AddUser adminPage = new AddUser(TypeCo);
             adminPage.ShowDialog();
         }
 
         private void loadListeParticipants()
         {
-            DBConnection dbCon = new DBConnection();
-            dbCon.Server = "127.0.0.1";
-            dbCon.DatabaseName = "ppe_client_lourd";
-            dbCon.UserName = "root";
-            dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+            DBConnection dbCon = DBConnection.Connect(TypeCo); 
             if (dbCon.IsConnect())
             {
                 string query = "SELECT id, nom, niveau FROM utilisateur ORDER BY id";
@@ -62,6 +60,7 @@ namespace PPE_Salons
         private void FormaterListe()
         {
             MaGrid.Columns["Nom"].HeaderText = "Nom d'utilisateur";
+            MaGrid.Columns["Pass"].Visible = false;
             MaGrid.MultiSelect = false;
             MaGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             MaGrid.ReadOnly = true;
@@ -72,11 +71,21 @@ namespace PPE_Salons
             foreach (DataGridViewRow row in MaGrid.SelectedRows)
             {
                 Utilisateur UnParticipant = row.DataBoundItem as Utilisateur;
-                if (UnParticipant.Supprimer())
-                    MessageBox.Show("Participant Supprimé !");
+                if (UnParticipant.Supprimer(TypeCo))
+                    MessageBox.Show("Utilisateur Supprimé !");
                 // Ici on rafraîchit la liste....
                 else
                     MessageBox.Show("Impossible de  Supprimer !");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in MaGrid.SelectedRows)
+            {
+                Utilisateur UnUtilisateur = row.DataBoundItem as Utilisateur;
+                PageUtilisateur MonFormParticipant = new PageUtilisateur(UnUtilisateur, TypeCo);
+                MonFormParticipant.Show();
             }
         }
     }

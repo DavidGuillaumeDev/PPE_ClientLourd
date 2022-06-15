@@ -40,6 +40,26 @@ namespace PPE_Salons
             return true;
         }
 
+        public static DBConnection Connect(int isLocal)
+        {
+            DBConnection dbCon = new DBConnection();
+            if (isLocal == 0)
+            {
+                dbCon.Server = "127.0.0.1";
+                dbCon.DatabaseName = "ppe_client_lourd";
+                dbCon.UserName = "root";
+                dbCon.Password = "";
+            }
+            else
+            {
+                dbCon.Server = "ppebelletablecerfal.chaisgxhr4z6.eu-west-3.rds.amazonaws.com";
+                dbCon.DatabaseName = "PPE_Guillaume";
+                dbCon.UserName = "admin";
+                dbCon.Password = Crypto.Decrypt("tr9y0URXywxHt1XgTEn4yg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+            }
+            return dbCon;
+        }
+
         
         public void Close()
         {

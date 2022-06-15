@@ -11,24 +11,23 @@ using MySql.Data.MySqlClient;
 
 namespace PPE_Salons
 {
-    public partial class Form1 : Form
+    public partial class FormMainMenu : Form
     {
         public int IdUtilisateur;
         public int LevelUtilisateur;
-        public Form1(int LevelNiveau, int LeUser)
+        public int TypeCo;
+        public FormMainMenu(int LevelNiveau, int LeUser, int LeTypeCo)
         {
             IdUtilisateur = LeUser;
             LevelUtilisateur = LevelNiveau;
+            TypeCo = LeTypeCo;
             InitializeComponent();
+            //tbNom.Text = TypeCo.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DBConnection dbCon = new DBConnection();
-            dbCon.Server = "127.0.0.1";
-            dbCon.DatabaseName = "ppe_client_lourd";
-            dbCon.UserName = "root";
-            dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+            DBConnection dbCon = DBConnection.Connect(TypeCo);
             if (dbCon.IsConnect())
             {
                 string query = "SELECT Id, Nom, Prenom, Email FROM contact ORDER BY Nom";
@@ -63,9 +62,8 @@ namespace PPE_Salons
             foreach (DataGridViewRow row in MaGrid.SelectedRows)
             {
                 Contact UnParticipant = row.DataBoundItem as Contact;
-                PageParticipant MonFormParticipant = new PageParticipant(UnParticipant);
+                PageParticipant MonFormParticipant = new PageParticipant(UnParticipant, TypeCo);
                 MonFormParticipant.Show();
-
             }
         }
 
@@ -73,7 +71,7 @@ namespace PPE_Salons
         {
             Contact UnParticipant = new Contact();
             UnParticipant.Id = 0;//Pour être sur qu'il soit inséré
-            PageParticipant MonFormParticipant = new PageParticipant(UnParticipant);
+            PageParticipant MonFormParticipant = new PageParticipant(UnParticipant, TypeCo);
             MonFormParticipant.Show();
         }
 
@@ -82,7 +80,7 @@ namespace PPE_Salons
             foreach (DataGridViewRow row in MaGrid.SelectedRows)
             {
                 Contact UnParticipant = row.DataBoundItem as Contact;
-                if (UnParticipant.Supprimer())
+                if (UnParticipant.Supprimer(TypeCo))
                     MessageBox.Show("Participant Supprimé !");
                 // Ici on rafraîchit la liste....
                 else
@@ -102,11 +100,7 @@ namespace PPE_Salons
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            DBConnection dbCon = new DBConnection();
-            dbCon.Server = "127.0.0.1";
-            dbCon.DatabaseName = "ppe_client_lourd";
-            dbCon.UserName = "root";
-            dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
+            DBConnection dbCon = DBConnection.Connect(TypeCo); 
             if (dbCon.IsConnect())
             {
                 string query = "SELECT Id, Nom, Prenom, Email FROM contact where Nom =?nom_P ORDER BY Nom";
@@ -147,7 +141,7 @@ namespace PPE_Salons
 
         private void buttonAdmin_Click(object sender, EventArgs e)
         {
-            AdminMenu UnAdminMenu = new AdminMenu();
+            AdminMenu UnAdminMenu = new AdminMenu(TypeCo);
             UnAdminMenu.Show();
         }
     }
